@@ -1,0 +1,123 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Documentation e.g. User Registration Test scenario with verification, valid and invalid credentials.
+
+Documentation	Testing the register functionality. Register test scenario with valid and invalid credentials.
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	Open browser
+Post Condition	Close all browsers
+Tags	Register, TS-1-Register 
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Registration field variables
+
+LoginUrl = https://gitlab.com/users/sign_up
+First name = Users first name
+Invalid_First name = 0000
+Last name = Users last name
+Invalid_Last name = 0000
+Username = Users username
+Invalid_Username = 0000
+Password = ********
+Email = User@gmail.com
+Invalid_Email = 0000
+Invalid_Password = ***
+Check_box_youre_not_a_bot = x
+Not_checked_box_youre_not_a_bot = 0
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps (Think about possible test cases)
+
+# Positive Test examples are below write test process steps for each below test case
+
+	Register user with valid credentials
+		Navigate To Login Page  LoginUrl
+		Input First name
+		Input Last name
+    	Input Username  UserName
+		Input Email
+   		Input Password  Password
+		Input Check_box_youre_not_a_bot
+    	Submit Register Form
+   		Verify Page Should Contain Welcome page	  
+
+# Negative Test examples keywords are below write test process steps for each below test case 
+
+	Register With Invalid Credential
+    	Navigate To Register Page  LoginUrl
+		Input Invalid_First name
+		Input Invalid_Last name
+    	Input Invalid_Username
+		Input Invalid_Email
+    	Input Invalid_Password
+		Input Not_checked_box_youre_not_a_bot
+    	Submit Register Form
+    	Verify Page Should Contain Invalid credentials
+	
+	Error message Should Be Visible After Invalid Register With Empty Spaces
+		Navigate To Login Page  LoginUrl
+		Input Empty
+		Input Empty
+    	Input Username  Empty
+		Input Empty
+   		Input Password  Empty
+		Check_box_youre_not_a_bot Empty
+    	Submit Register Form
+   		Verify That Error message should show This field is required
+
+	Error message Should Be Visible After Invalid Register With Valid Email And Invalid Password
+		Navigate To Login Page  LoginUrl
+		Input First name
+		Input Last name
+    	Input Username  UserName
+		Input Email
+   		Input Password  Invalid_Password
+		Check_box_youre_not_a_bot
+    	Submit Register Form
+   		Verify That Error message should show invalid password
+
+	Error message Should Be Visible After Invalid Register With Invalid Email And Valid Password
+		Navigate To Login Page  LoginUrl
+		Input First name
+		Input Last name
+    	Input Username  UserName
+		Input Invalid_Email
+   		Input Password  Password
+		Check_box_youre_not_a_bot
+    	Submit Register Form
+   		Verify That Error message should show invalid email
+	
+	Error message Should Be Visible After Invalid Register With valid credentials but Not_checked_box_youre_not_a_bot
+		Navigate To Login Page  LoginUrl
+		Input First name
+		Input Last name
+    	Input Username  UserName
+		Input Email
+   		Input Password  password
+		Not_checked_box_youre_not_a_bot
+    	Submit Register Form
+   		Verify That Error message should show verify youre not a bot
+
+	Error message Should Be Visible After Invalid Register With invalid credentials but Check_box_youre_not_a_bot
+		Navigate To Register Page  LoginUrl
+		Input Invalid_First name
+		Input Invalid_Last name
+    	Input Invalid_Username
+		Input Invalid_Email
+    	Input Invalid_Password
+		Input Check_box_youre_not_a_bot
+    	Submit Register Form
+    	Verify Page Should Contain Invalid credentials

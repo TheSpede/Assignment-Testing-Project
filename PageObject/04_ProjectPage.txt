@@ -1,0 +1,114 @@
+
+#******************** Settings ************************
+
+*** Settings ***
+
+# TODO: Write Dcocumentation e.g. Project Test scenario. CRUD Operation: Create, Read, Update, Delete
+
+Documentation	Testing new project page functionality. Testing new projects Create, Read, Update and Delete functionalities
+
+# TODO: Write Precondition, Postcondition, Tags
+
+Pre Condition	 Login to gitlab account
+Post Condition	Log out of gitlab account 
+Tags Projectpage, TS-1-Projectpage
+
+#******************* Common Variables ********************
+
+*** Variables ***
+
+# NOTE: Please Remove your login credential before uploading Assignments
+
+# TODO: Write Project creation field variables
+
+LoginUrl = https://gitlab.com/users/sign_up
+Project_name = Users project name
+Project_URL = https://gitlab.com/projectname7404920
+Project_slug = Project name
+
+
+#******************** Test Cases *************************
+
+*** Test Case ***
+
+# TODO: Write Positive and Negative Test Cases and Test Process steps
+
+# Positive Test examples are below write test process steps for each below test case
+
+Create a new project
+	Click Create new project
+	Click create blank project
+	Input Project_name
+	Input Project_URL
+	Click create project
+	Validate that message is showing Project 'Project_name ' was successfully created.
+
+Create a new project from template
+	Click Create new project
+	Click create from template
+	Click a template
+	Input Project_name
+	Input Project_URL
+	Click create project
+	Validate that message is showing "The project was successfully imported."
+
+Add a new file to a project	
+	Click on a project
+	Add a new file to the directory
+	Give file a name
+	Click commit changes
+	Verify that a message says "The file has been successfully created."
+
+Delete a project
+	Click on a project
+	Go to settings 
+	Click general
+	Expand advanced settings
+	Click delete project
+	Input project name
+	Verify message shows "Project 'Project_URL / Project_name-deleted-57908791' will be deleted on 2024-05-23."
+
+# Negative Test examples are below write test process steps for each below test case
+
+Create a blank project with empty boxes
+	Click Create new project
+	Click create blank project
+	Input Project_name Empty
+	Input Project_URL Empty
+	Click create project
+	Validate that error message is showing "please fill this information". 
+
+Create a new project from template with empty boxes
+	Click Create new project
+	Click create from template
+	Click a template
+	Input Project_name Empty
+	Input Project_URL Empty
+	Click create project
+	Validate that error message is showing "Please fill this information."
+
+Create a new blank project with the same name
+	Click Create new project
+	Click create blank project
+	Input Same Project_name
+	Input Same Project_URL
+	Click create project
+	Validate that error message is showing "The form contains the following error. The name has already been taken. The path has already been taken."
+
+Create a new project from template with the same name
+	Click Create new project
+	Click create from template
+	Click a template
+	Input Same Project_name
+	Input Same Project_URL
+	Click create project
+	Validate that error message is showing "The form contains the following errors: Project namespace name has already been taken. Name has already been taken. Path has already been taken."
+
+Delete a project with wrong information
+	Click on a project
+	Go to settings 
+	Click general
+	Expand advanced settings
+	Click delete project
+	Input wrong project name
+	Validate that you cannot delete the project.
